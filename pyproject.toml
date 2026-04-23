@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sales-prediction"
+version = "0.1.0"
+description = "Prediction of Product Sales — end-to-end retail sales analysis and preprocessing pipeline."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Belal Asem" }]
+license = { text = "MIT" }
+keywords = ["data-science", "machine-learning", "retail", "sales-prediction", "eda"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+    "numpy>=2.0,<3.0",
+    "pandas>=2.2,<3.0",
+    "scikit-learn>=1.5,<2.0",
+    "matplotlib>=3.9,<4.0",
+    "seaborn>=0.13,<1.0",
+    "gdown>=5.2",
+]
+
+[project.optional-dependencies]
+notebook = ["jupyter>=1.1", "ipykernel>=6.29", "nbformat>=5.10"]
+dev = ["ruff>=0.6", "pytest>=8.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "SIM", "PL"]
+ignore = ["PLR0913"]
