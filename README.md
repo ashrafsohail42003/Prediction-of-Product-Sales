@@ -120,4 +120,4 @@ Future iterations of this portfolio project will layer on:
 
 ## Author
 
-**Ashraf Alkahlou** — Computer Engineering graduate (GPA 90.33%), building a portfolio of production-quality data-science and full-stack web projects. Open to data-science and full-stack engineering opportunities; actively preparing for a fully funded master's in the UK / Ireland / Malta.
+**Ashraf Alkahlout** — Computer Engineering graduate (GPA 88%), Frontend (Nextjs + supabase ) , and ML Engineer 
