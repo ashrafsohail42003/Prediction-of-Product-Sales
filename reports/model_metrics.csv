@@ -1,0 +1,7 @@
+model,split,MAE,MSE,RMSE,R2
+Linear Regression,Train,847.13,1297558.14,1139.1,0.5616
+Linear Regression,Test,804.12,1194349.72,1092.86,0.5671
+Random Forest,Train,295.01,179084.45,423.18,0.9395
+Random Forest,Test,768.82,1217310.96,1103.32,0.5588
+Tuned Random Forest,Train,755.39,1152612.12,1073.6,0.6105
+Tuned Random Forest,Test,728.36,1096396.16,1047.09,0.6026

@@ -1,0 +1,84 @@
+{
+  "rows": 8523,
+  "columns": 12,
+  "duplicates": 0,
+  "missing_values": {
+    "Item_Weight": 1463,
+    "Outlet_Size": 2410
+  },
+  "cleaned_processed_path": "C:\\Users\\MSI\\Desktop\\project\\Prediction-of-Product-Sales\\data\\processed\\cleaned_sales.csv",
+  "best_grid_params": {
+    "max_depth": 5,
+    "min_samples_leaf": 1,
+    "n_estimators": 100
+  },
+  "cv_best_r2": 0.5952,
+  "recommended_model": "Tuned Random Forest",
+  "test_metrics": [
+    {
+      "model": "Tuned Random Forest",
+      "split": "Test",
+      "MAE": 728.36,
+      "MSE": 1096396.16,
+      "RMSE": 1047.09,
+      "R2": 0.6026
+    },
+    {
+      "model": "Linear Regression",
+      "split": "Test",
+      "MAE": 804.12,
+      "MSE": 1194349.72,
+      "RMSE": 1092.86,
+      "R2": 0.5671
+    },
+    {
+      "model": "Random Forest",
+      "split": "Test",
+      "MAE": 768.82,
+      "MSE": 1217310.96,
+      "RMSE": 1103.32,
+      "R2": 0.5588
+    }
+  ],
+  "top_linear_coefficients": [
+    {
+      "feature": "Outlet_Type_Grocery Store",
+      "coefficient": -1095.8705357871918,
+      "abs_coefficient": 1095.8705357871918
+    },
+    {
+      "feature": "Item_MRP",
+      "coefficient": 984.5130739465161,
+      "abs_coefficient": 984.5130739465161
+    },
+    {
+      "feature": "Outlet_Identifier_OUT027",
+      "coefficient": 710.8575173052857,
+      "abs_coefficient": 710.8575173052857
+    }
+  ],
+  "top_rf_features": [
+    {
+      "feature": "Item_MRP",
+      "importance": 0.5538382098042882
+    },
+    {
+      "feature": "Outlet_Type_Grocery Store",
+      "importance": 0.313939525971684
+    },
+    {
+      "feature": "Outlet_Type_Supermarket Type3",
+      "importance": 0.061383893267542046
+    },
+    {
+      "feature": "Outlet_Identifier_OUT027",
+      "importance": 0.0456950559331535
+    },
+    {
+      "feature": "Outlet_Establishment_Year",
+      "importance": 0.02075141904284065
+    }
+  ],
+  "random_state": 42,
+  "target": "Item_Outlet_Sales"
+}

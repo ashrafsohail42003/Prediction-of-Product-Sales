@@ -1,0 +1,20 @@
+# Data snapshots and local artifacts
+data/raw/
+*.pkl
+*.joblib
+
+# Notebook/runtime clutter
+.ipynb_checkpoints/
+__pycache__/
+*.py[cod]
+
+# Environment files
+.env
+.venv/
+venv/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
