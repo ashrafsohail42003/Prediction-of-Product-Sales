@@ -1,14 +1,12 @@
-"""Reusable plotting helpers for EDA, model evaluation, and interpretation."""
-
 from __future__ import annotations
-
+from pathlib import Path
+from typing import Any
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
 
 def set_plot_style() -> None:
-    """Apply a consistent reporting style."""
     sns.set_theme(style="whitegrid", context="notebook")
     plt.rcParams["figure.dpi"] = 140
     plt.rcParams["savefig.dpi"] = 220
@@ -16,16 +14,15 @@ def set_plot_style() -> None:
     plt.rcParams["axes.labelsize"] = 10
 
 
-def save_figure(path) -> None:
-    """Save the current matplotlib figure and close it."""
+def save_figure(path: Path | str) -> None:
+    path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     plt.tight_layout()
     plt.savefig(path, bbox_inches="tight")
     plt.close()
 
 
-def plot_correlation_heatmap(df: pd.DataFrame, path) -> None:
-    """Save a heatmap of numeric feature correlations."""
+def plot_correlation_heatmap(df: pd.DataFrame, path: Path | str) -> None:
     set_plot_style()
     corr = df.select_dtypes(include="number").corr()
     plt.figure(figsize=(8, 6))
@@ -34,8 +31,7 @@ def plot_correlation_heatmap(df: pd.DataFrame, path) -> None:
     save_figure(path)
 
 
-def plot_outlet_type_vs_sales(df: pd.DataFrame, path) -> None:
-    """Save a bar plot of average sales by outlet type."""
+def plot_outlet_type_vs_sales(df: pd.DataFrame, path: Path | str) -> None:
     set_plot_style()
     order = (
         df.groupby("Outlet_Type")["Item_Outlet_Sales"]
@@ -52,12 +48,13 @@ def plot_outlet_type_vs_sales(df: pd.DataFrame, path) -> None:
     save_figure(path)
 
 
-def plot_model_comparison(metrics_df: pd.DataFrame, path) -> None:
-    """Save a side-by-side comparison of test model performance."""
+def plot_model_comparison(metrics_df: pd.DataFrame, path: Path | str) -> None:
     set_plot_style()
     test_metrics = metrics_df.query("split == 'Test'").copy()
     plt.figure(figsize=(8, 5))
-    ax = sns.barplot(data=test_metrics, x="model", y="R2", hue="model", dodge=False, legend=False)
+    ax = sns.barplot(
+        data=test_metrics, x="model", y="R2", hue="model", dodge=False, legend=False
+    )
     ax.set_title("Test R-Squared by Model")
     ax.set_xlabel("Model")
     ax.set_ylabel("Test R-Squared")
@@ -66,21 +63,30 @@ def plot_model_comparison(metrics_df: pd.DataFrame, path) -> None:
     save_figure(path)
 
 
-def _model_feature_frame(pipeline, values, value_name: str) -> pd.DataFrame:
+def _model_feature_frame(pipeline: Any, values: Any, value_name: str) -> pd.DataFrame:
     feature_names = pipeline.named_steps["preprocessor"].get_feature_names_out()
     return pd.DataFrame({"feature": feature_names, value_name: values})
 
 
-def plot_linear_regression_coefficients(pipeline, path, *, top_n: int = 20) -> pd.DataFrame:
-    """Save the strongest linear regression coefficients by absolute value."""
+def plot_linear_regression_coefficients(
+    pipeline: Any, path: Path | str, *, top_n: int = 20
+) -> pd.DataFrame:
     set_plot_style()
     coefs = pipeline.named_steps["model"].coef_
     coef_df = _model_feature_frame(pipeline, coefs, "coefficient")
+
     coef_df["abs_coefficient"] = coef_df["coefficient"].abs()
     top = coef_df.sort_values("abs_coefficient", ascending=False).head(top_n)
 
     plt.figure(figsize=(9, 7))
-    ax = sns.barplot(data=top, y="feature", x="coefficient", hue="coefficient", palette="vlag", legend=False)
+    ax = sns.barplot(
+        data=top,
+        y="feature",
+        x="coefficient",
+        hue="coefficient",
+        palette="vlag",
+        legend=False,
+    )
     ax.axvline(0, color="black", linewidth=1)
     ax.set_title("Most Influential Linear Regression Coefficients")
     ax.set_xlabel("Coefficient")
@@ -89,8 +95,9 @@ def plot_linear_regression_coefficients(pipeline, path, *, top_n: int = 20) -> p
     return coef_df.sort_values("abs_coefficient", ascending=False)
 
 
-def plot_rf_feature_importance(pipeline, path, *, top_n: int = 20) -> pd.DataFrame:
-    """Save the strongest random forest feature importances."""
+def plot_rf_feature_importance(
+    pipeline: Any, path: Path | str, *, top_n: int = 20
+) -> pd.DataFrame:
     set_plot_style()
     importances = pipeline.named_steps["model"].feature_importances_
     importance_df = _model_feature_frame(pipeline, importances, "importance")

@@ -1,20 +1,36 @@
-# Data snapshots and local artifacts
+# --- Data & model artifacts ---
 data/raw/
 *.pkl
 *.joblib
 
-# Notebook/runtime clutter
-.ipynb_checkpoints/
+# --- Python ---
 __pycache__/
 *.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
 
-# Environment files
+# --- Virtualenvs ---
 .env
 .venv/
 venv/
+env/
 
-# OS/editor files
+# --- Notebooks ---
+.ipynb_checkpoints/
+
+# --- Tooling caches ---
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+htmlcov/
+.coverage
+.coverage.*
+
+# --- OS / editors ---
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
+*.swp

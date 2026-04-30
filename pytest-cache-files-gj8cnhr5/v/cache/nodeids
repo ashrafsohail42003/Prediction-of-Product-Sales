@@ -1,0 +1,20 @@
+[
+  "tests/test_data_loader.py::test_basic_cleaning_drops_duplicates",
+  "tests/test_data_loader.py::test_basic_cleaning_with_placeholders_removes_nulls",
+  "tests/test_data_loader.py::test_fat_content_map_is_complete",
+  "tests/test_data_loader.py::test_fix_inconsistent_categories_normalizes_fat_content",
+  "tests/test_data_loader.py::test_missing_value_report_returns_only_missing_columns",
+  "tests/test_data_loader.py::test_restore_placeholders_round_trip",
+  "tests/test_data_loader.py::test_summarize_numeric_columns_has_expected_stats",
+  "tests/test_evaluation.py::test_evaluate_regression_model_shape",
+  "tests/test_evaluation.py::test_regression_metrics_keys",
+  "tests/test_evaluation.py::test_regression_metrics_perfect_prediction",
+  "tests/test_modeling.py::test_linear_pipeline_fits_and_predicts",
+  "tests/test_modeling.py::test_random_forest_pipeline_fits_and_predicts",
+  "tests/test_modeling.py::test_split_features_target_drops_id_and_target",
+  "tests/test_modeling.py::test_train_test_split_is_reproducible",
+  "tests/test_preprocessing.py::test_make_preprocessor_returns_column_transformer",
+  "tests/test_preprocessing.py::test_preprocessor_handles_unknown_categories",
+  "tests/test_preprocessing.py::test_preprocessor_imputes_and_encodes",
+  "tests/test_preprocessing.py::test_preprocessor_scaling_changes_numeric_columns"
+]

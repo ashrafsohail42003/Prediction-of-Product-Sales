@@ -1,0 +1,26 @@
+name: retail-sales-prediction
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip>=24.0
+  # Core scientific stack
+  - numpy>=1.26
+  - pandas>=2.2
+  - scikit-learn>=1.5
+  - joblib>=1.4
+  # Visualization
+  - matplotlib>=3.9
+  - seaborn>=0.13
+  # Notebooks / execution
+  - jupyterlab>=4.2
+  - notebook>=7.2
+  - nbformat>=5.10
+  - nbclient>=0.10
+  - ipykernel>=6.29
+  # Dev tooling (optional but recommended)
+  - pytest>=8.3
+  - pip:
+      - ruff>=0.6.0
+      - black>=24.8.0

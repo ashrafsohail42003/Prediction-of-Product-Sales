@@ -1,36 +1,33 @@
-"""Model construction, splitting, and tuning helpers."""
-
 from __future__ import annotations
-
+from typing import Any
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.pipeline import Pipeline
-
 from .config import DROP_FEATURES, RANDOM_STATE, TARGET, TEST_SIZE
 from .preprocessing import make_preprocessor
-
-
 def split_features_target(
     df: pd.DataFrame,
     *,
     target: str = TARGET,
     drop_features: tuple[str, ...] = DROP_FEATURES,
-):
-    """Split a cleaned dataframe into features and target."""
+) -> tuple[pd.DataFrame, pd.Series]:
     X = df.drop(columns=[target, *drop_features])
     y = df[target]
     return X, y
 
-
-def make_train_test_split(X, y, *, test_size: float = TEST_SIZE, random_state: int = RANDOM_STATE):
-    """Create a reproducible train-test split."""
+def make_train_test_split(
+    X: pd.DataFrame,
+    y: pd.Series,
+    *,
+    test_size: float = TEST_SIZE,
+    random_state: int = RANDOM_STATE,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
     return train_test_split(X, y, test_size=test_size, random_state=random_state)
 
 
 def build_linear_regression_pipeline() -> Pipeline:
-    """Create a linear regression pipeline with scaled numeric features."""
     return Pipeline(
         steps=[
             ("preprocessor", make_preprocessor(scale_numeric=True)),
@@ -39,9 +36,8 @@ def build_linear_regression_pipeline() -> Pipeline:
     )
 
 
-def build_random_forest_pipeline(**model_params) -> Pipeline:
-    """Create a random forest regression pipeline."""
-    params = {"random_state": RANDOM_STATE, "n_jobs": 1}
+def build_random_forest_pipeline(**model_params: Any) -> Pipeline:
+    params: dict[str, Any] = {"random_state": RANDOM_STATE, "n_jobs": 1}
     params.update(model_params)
     return Pipeline(
         steps=[
@@ -51,8 +47,11 @@ def build_random_forest_pipeline(**model_params) -> Pipeline:
     )
 
 
-def tune_random_forest(pipeline: Pipeline, X_train, y_train) -> GridSearchCV:
-    """Tune a random forest with a compact grid over at least two hyperparameters."""
+def tune_random_forest(
+    pipeline: Pipeline,
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+) -> GridSearchCV:
     param_grid = {
         "model__n_estimators": [100, 200],
         "model__max_depth": [5, None],

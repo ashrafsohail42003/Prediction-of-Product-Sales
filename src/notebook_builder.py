@@ -1,14 +1,9 @@
-"""Generate the project notebooks with structured, repeatable content."""
-
 from __future__ import annotations
-
 import argparse
 import textwrap
 from pathlib import Path
-
 import nbformat as nbf
 import pandas as pd
-
 from .config import DATA_DICTIONARY, RAW_DATA_PATH, ROOT_DIR, TARGET
 from .data_loader import basic_cleaning
 

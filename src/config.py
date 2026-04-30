@@ -1,25 +1,26 @@
-"""Project-level paths and constants."""
+from __future__ import annotations
 
 from pathlib import Path
+from typing import Final
+RANDOM_STATE: Final[int] = 42
+TEST_SIZE: Final[float] = 0.25
+TARGET: Final[str] = "Item_Outlet_Sales"
+# Features dropped before model training (high-cardinality identifiers, etc.)
+DROP_FEATURES: Final[tuple[str, ...]] = ("Item_Identifier",)
+MISSING_CATEGORY: Final[str] = "Missing"
+MISSING_NUMERIC: Final[int] = -1
+ROOT_DIR: Final[Path] = Path(__file__).resolve().parents[1]
 
-RANDOM_STATE = 42
-TEST_SIZE = 0.25
-TARGET = "Item_Outlet_Sales"
-DROP_FEATURES = ("Item_Identifier",)
+DATA_DIR: Final[Path] = ROOT_DIR / "data"
+RAW_DATA_PATH: Final[Path] = DATA_DIR / "raw" / "sales_predictions.csv"
+PROCESSED_DATA_PATH: Final[Path] = DATA_DIR / "processed" / "cleaned_sales.csv"
 
-ROOT_DIR = Path(__file__).resolve().parents[1]
-DATA_DIR = ROOT_DIR / "data"
-RAW_DATA_PATH = DATA_DIR / "raw" / "sales_predictions.csv"
-PROCESSED_DATA_PATH = DATA_DIR / "processed" / "cleaned_sales.csv"
-REPORTS_DIR = ROOT_DIR / "reports"
-FIGURES_DIR = REPORTS_DIR / "figures"
-MODELS_DIR = ROOT_DIR / "models"
-BEST_MODEL_PATH = MODELS_DIR / "best_rf_model.joblib"
+REPORTS_DIR: Final[Path] = ROOT_DIR / "reports"
+FIGURES_DIR: Final[Path] = REPORTS_DIR / "figures"
 
-MISSING_CATEGORY = "Missing"
-MISSING_NUMERIC = -1
-
-DATA_DICTIONARY = {
+MODELS_DIR: Final[Path] = ROOT_DIR / "models"
+BEST_MODEL_PATH: Final[Path] = MODELS_DIR / "best_rf_model.joblib"
+DATA_DICTIONARY: Final[dict[str, str]] = {
     "Item_Identifier": "Unique product ID",
     "Item_Weight": "Weight of product",
     "Item_Fat_Content": "Whether the product is low fat or regular",
@@ -30,7 +31,7 @@ DATA_DICTIONARY = {
     "Item_Type": "The category to which the product belongs",
     "Item_MRP": "Maximum Retail Price (list price) of the product",
     "Outlet_Identifier": "Unique store ID",
-    "Outlet_Establishment_Year": "The year in which store was established",
+    "Outlet_Establishment_Year": "The year in which the store was established",
     "Outlet_Size": "The size of the store in terms of ground area covered",
     "Outlet_Location_Type": "The type of area in which the store is located",
     "Outlet_Type": "Whether the outlet is a grocery store or some sort of supermarket",
@@ -42,6 +43,11 @@ DATA_DICTIONARY = {
 
 
 def ensure_project_dirs() -> None:
-    """Create project output directories if they do not already exist."""
-    for path in (DATA_DIR / "raw", DATA_DIR / "processed", FIGURES_DIR, MODELS_DIR):
+    """Create the project's output directories idempotently."""
+    for path in (
+        DATA_DIR / "raw",
+        DATA_DIR / "processed",
+        FIGURES_DIR,
+        MODELS_DIR,
+    ):
         path.mkdir(parents=True, exist_ok=True)
