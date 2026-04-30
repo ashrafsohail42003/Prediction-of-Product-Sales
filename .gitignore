@@ -1,41 +1,3 @@
-<<<<<<< HEAD
-# --- Data & model artifacts ---
-data/raw/
-*.pkl
-*.joblib
-
-# --- Python ---
-__pycache__/
-*.py[cod]
-*.egg-info/
-build/
-dist/
-.eggs/
-
-# --- Virtualenvs ---
-.env
-.venv/
-venv/
-env/
-
-# --- Notebooks ---
-.ipynb_checkpoints/
-
-# --- Tooling caches ---
-.pytest_cache/
-.ruff_cache/
-.mypy_cache/
-htmlcov/
-.coverage
-.coverage.*
-
-# --- OS / editors ---
-.DS_Store
-Thumbs.db
-.vscode/
-.idea/
-*.swp
-=======
 # ---------- Python ----------
 __pycache__/
 *.py[cod]
@@ -46,7 +8,6 @@ build/
 dist/
 *.egg-info/
 .eggs/
-.installed.cfg
 *.egg
 pip-wheel-metadata/
 
@@ -60,9 +21,6 @@ ENV/
 # ---------- Jupyter / IPython ----------
 .ipynb_checkpoints/
 */.ipynb_checkpoints/*
-.jupyter/
-profile_default/
-ipython_config.py
 
 # ---------- Testing / Coverage ----------
 .pytest_cache/
@@ -80,19 +38,8 @@ coverage.xml
 .pyre/
 .pytype/
 
-# ---------- Data (raw/processed kept out of VCS) ----------
-data/raw/*
-!data/raw/.gitkeep
-data/processed/*
-!data/processed/.gitkeep
-data/interim/*
-!data/interim/.gitkeep
-*.csv
-!reports/**/*.csv
-
-# ---------- Models ----------
-models/*
-!models/.gitkeep
+# ---------- Project data & model artifacts ----------
+data/raw/
 *.pkl
 *.joblib
 *.h5
@@ -112,4 +59,3 @@ desktop.ini
 .env
 .env.*
 !.env.example
->>>>>>> 2011e4f636c477ea5641289ef2250e24ad5b1d90
